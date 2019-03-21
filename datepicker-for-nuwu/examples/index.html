@@ -22,16 +22,24 @@
     });
   // initially render the "Styled" example to avoid "blank page" on initial page load:
   Elm['Range'].embed(document.getElementById("example"));
+  
+  
         
        
   
   var test = document.getElementById("example");
   console.log(document.getElementById("example"));
+  var x = document.getElementsByClassName("pa1 pointer bg-dark-red white");
+  document.getElementById("demo").innerHTML = x.length;
+  document.getElementById("demo").innerHTML = x;
+  
   
   
 
 
 </script>
+    <p id="demo"></p>
+    <p id="demo2"></p>
     <button type="button" id="submit_button" onclick="alert(test);">確認</button>
   </body>
 </html>
