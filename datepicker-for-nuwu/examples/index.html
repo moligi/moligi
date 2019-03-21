@@ -18,8 +18,6 @@
     .forEach(function (ex) {
       ex.addEventListener("click", function (e) {
         Elm[e.target.hash.slice(1)].embed(document.getElementById("example"));
-         console.log(ex);
-         console.log(document.getElementById("example"));
       });
     });
   // initially render the "Styled" example to avoid "blank page" on initial page load:
@@ -121,7 +119,7 @@
       
     <p id="demo"></p>
     <p id="demo2"></p>
-    <button type="button" id="submit_button" onclick="test();">確認</button> 
+    <button type="button" id="submit_button" onclick="tes">確認</button> 
     
   </body>
 </html>
