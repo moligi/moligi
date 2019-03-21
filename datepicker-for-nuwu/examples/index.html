@@ -22,48 +22,10 @@
     });
   // initially render the "Styled" example to avoid "blank page" on initial page load:
   Elm['Range'].embed(document.getElementById("example"));
-        function sendMessage(){
-                     //alert('sendMessage Starts');
-                     let message = {
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": [{
-                              "title":"Selected days for vacation",
-                              "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
-                              "subtitle": "From " + " to ",
-                            }]
-                          }
-                        }
-                      };
-                     MessengerExtensions.beginShareFlow(function(share_response) {
-                        // User dismissed without error, but did they share the message?
-                        //alert('beginShareFlow starts');
-                        //var message = $( "#from_field_id" ).val();
-                        if(share_response.is_sent){
-                        //alert('share response sent');
-                        // The user actually did share. 
-                        // Perhaps close the window w/ requestCloseBrowser().
-                                MessengerExtensions.requestCloseBrowser(function success() {
-                                 //alert('requestCloseBrowser');
-                                 //alert($( "#from_field_id" ).val());
-                                 //alert($( "#to_field_id" ).val());
-                              }, function error(err) {
-                                    alert(err);
-                        });             
-                       }
-                      }, 
-                        function(errorCode, errorMessage) {      
-                          // An error occurred in the process
-
-                        },
-                          message,
-                          "current_thread");
-         
-        }
+        
+       
   
-  var test = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0];
+  var test = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white");
   
   
 
