@@ -18,18 +18,22 @@
     .forEach(function (ex) {
       ex.addEventListener("click", function (e) {
         Elm[e.target.hash.slice(1)].embed(document.getElementById("example"));
+         console.log(ex);
+         console.log(document.getElementById("example"));
       });
     });
   // initially render the "Styled" example to avoid "blank page" on initial page load:
   Elm['Range'].embed(document.getElementById("example"));
+  
+    
+ 
   </script>
 
 
-    <script type="text/javascript">
-   console.log(document.getElementById('title').innerHTML);
-  var x = document.getElementById('title').innerHTML;
+    
+
       
-      </script>
+    
       
     <p id="demo"></p>
     <p id="demo2"></p>
