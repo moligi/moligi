@@ -67,13 +67,19 @@
                 });
             };
        
-       function sendMessage() {
-           
+               function sendMessage() {
+            
             /// how to return? the facebook docs don't say anything
             /// you HAVE to make a server round trip.. https://stackoverflow.com/questions/43956045/messengerextensions-how-to-send-a-message-by-messenger-to-users
             return {
                 text: "HOTEL_SERVICE_PAYLOAD",
-              
+                attachments: [
+                    {
+                        email: "some@email.com",
+                        hotelName: "Hotel marriott",
+                        confirmNumber: "1234567"
+                    }
+                ]
             }
             MessengerExtensions.requestCloseBrowser(function success() {
 
