@@ -49,7 +49,7 @@
               MessengerExtensions.getSupportedFeatures(function success(result) {
                   let features = result.supported_features;
                    //alert('Supported Facebook Features: ' + features);
-                     MessengerExtensions.getContext('214020109069642',
+                     MessengerExtensions.getContext('3008811899144178',
                        function success(thread_context) {
                         // success
                         //document.getElementById("psid").value = thread_context.psid;
@@ -67,25 +67,69 @@
                 });
             };
        
-               function sendMessage() {
-            
-            /// how to return? the facebook docs don't say anything
-            /// you HAVE to make a server round trip.. https://stackoverflow.com/questions/43956045/messengerextensions-how-to-send-a-message-by-messenger-to-users
-            return {
-                text: "HOTEL_SERVICE_PAYLOAD",
-                attachments: [
-                    {
-                        email: "some@email.com",
-                        hotelName: "Hotel marriott",
-                        confirmNumber: "1234567"
-                    }
-                ]
-            }
-            MessengerExtensions.requestCloseBrowser(function success() {
+       function sendMessage(){
+       
+                     //alert('sendMessage Starts');
+	              var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
+       Date.prototype.Format = function (fmt) { 
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+       var monthAndYear =  document.getElementsByClassName("tc")[1].innerHTML;
+       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
+       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
+        dateFrom = new Date(dateFrom + " " + monthAndYear);
+	dateFrom = dateFrom.Format("yyyy-MM-dd");
+        dateEnd =  new Date(dateEnd + " " + monthAndYear);
+	dateEnd = dateEnd.Format("yyyy-MM-dd");
+        let message = {
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"generic",
+                            "elements": [{
+                              "title":dateFrom + "~" + dateEnd,
+                              "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
+                              "subtitle": dateFrom + "~" + dateEnd,
+                            }]
+                          }
+                        }
+                      };
+                     MessengerExtensions.beginShareFlow(function(share_response) {
+                        // User dismissed without error, but did they share the message?
+                        //alert('beginShareFlow starts');
+                        //var message = $( "#from_field_id" ).val();
+                        if(share_response.is_sent){
+                        //alert('share response sent');
+                        // The user actually did share. 
+                        // Perhaps close the window w/ requestCloseBrowser().
+                                MessengerExtensions.requestCloseBrowser(function success() {
+                                 //alert('requestCloseBrowser');
+                                 //alert($( "#from_field_id" ).val());
+                                 //alert($( "#to_field_id" ).val());
+                              }, function error(err) {
+                                    alert(err);
+                        });             
+                       }
+                      }, 
+                        function(errorCode, errorMessage) {      
+                          // An error occurred in the process
 
-            }, function error(err) {
-
-            });
+                        },
+                          message,
+                          "current_thread");
+         
         }
     </script>
 
