@@ -1,130 +1,191 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>DatePicker Nuwu</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css" />
+
+<html>
+
+	<head>
+	
+		<title>Date Picker</title>
     
-  </head>
-  <body>
-        <div class="w-100 tc">
-      <div id="example" class="pa3">
-      </div>
-    </div>
-      <script src="example.js"></script>
-      <script type="text/javascript">
-        Array.prototype.slice
-          .apply(document.getElementsByClassName("example"))
-          .forEach(function (ex) {
-            ex.addEventListener("click", function (e) {
-              Elm[e.target.hash.slice(1)].embed(document.getElementById("example"));
+    <frame src="https://datepicker.glitch.me/" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="DateTimePicker.css" />
+		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.0.min.css" />
+	
+		<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile-1.4.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	
+		<script type="text/javascript" src="DateTimePicker.js"></script>
+    
+    
+		<script type="text/javascript">
+		
+			$(document).ready(function()
+			{
+				// DOM Element Insertion and Plugin Initialisation on loading of first page if you are using DatePicker on first page
+				$("#page1").append("<div id='dateBox'></div>"); // Add Element To DOM
+				$("#dateBox").DateTimePicker(); // Plugin Initialization
+			
+			
+				// Otherwise, DOM Element Insertion and Plugin Initialisation can be done on pageshow
+				$("#page1, #page2").on("pageshow", function(event) 
+				{
+					$(this).append("<div id='dateBox'></div>"); // Add Element To DOM
+					$("#dateBox").DateTimePicker(); // Plugin Initialization
+				});
+			
+				// DOM Element Removal on pagehide method
+				$("#page1, #page2").on("pagehide", function(event) 
+				{
+					$("#dateBox").remove(); // Remove Element From DOM
+				});
+        
+        // process the form
+        $('form').submit(function(event) {
+
+        // get the form data
+        // there are many ways to get this data using jQuery (you can use the class or id also)
+        var formData = {
+            'name'              : $('input[name=from_date]').val(),
+            'email'             : $('input[name=to_date]').val(),
+        };
+        alert(formData);
+        // process the form
+        $.ajax({
+            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            url         : 'https://datepicker.glitch.me', // the url where we want to POST
+            data        : formData, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+                        encode          : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+
+                // log data to the console so we can see
+                console.log(data); 
+
+                // here we will handle errors and validation messages
             });
-          });
-        // initially render the "Styled" example to avoid "blank page" on initial page load:
-        Elm['Range'].embed(document.getElementById("example"));
-        
-       var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
-       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
-       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
-       var test = yearMOnth + dateFrom 
-       function test(){
-       var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
-       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
-       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
-       var test = yearMOnth + dateFrom 
-       alert(test); 
-       }
-        
-        
-        
-                  (function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) {
-                        return;
-                    }
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'Messenger'));
-             
-               window.extAsyncInit = function () {
-                    // SDK loaded, code to follow
-                    var isSupported = MessengerExtensions.isInExtension(); 
-                    //alert('Is MessengerExtensions supported: ' + isSupported);
-                    MessengerExtensions.getSupportedFeatures(function success(result) {
-                        let features = result.supported_features;
-                         //alert('Supported Facebook Features: ' + features);
-                           MessengerExtensions.getContext('3008811899144178',
-                             function success(thread_context) {
-                              // success
-                              //document.getElementById("psid").value = thread_context.psid;
-                              //alert('PSID of current thread: ' + thread_context.psid);
-                              
-                              // More code to follow
-                            },
-                            function error(err) {
-                              alert(err);
-                            }
-                          );
-                        
-                      }, function error(err) {
-                        alert(err);
-                      });
-                  };
-             
-             function sendMessage(){
-                var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
-       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
-       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
-       var test = yearMOnth + dateFrom 
-                           //alert('sendMessage Starts');
-                           let message = {
-                              "attachment":{
-                                "type":"template",
-                                "payload":{
-                                  "template_type":"generic",
-                                  "elements": [{
-                                    "title":"Selected days for vacation",
-                                    "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
-                                    "subtitle": test,
-                                  }]
-                                }
-                              }
-                            };
-                           MessengerExtensions.beginShareFlow(function(share_response) {
-                              // User dismissed without error, but did they share the message?
-                              //alert('beginShareFlow starts');
-                              //var message = $( "#from_field_id" ).val();
-                              if(share_response.is_sent){
-                              //alert('share response sent');
-                              // The user actually did share. 
-                              // Perhaps close the window w/ requestCloseBrowser().
-                                      MessengerExtensions.requestCloseBrowser(function success() {
-                                       //alert('requestCloseBrowser');
-                                       //alert($( "#from_field_id" ).val());
-                                       //alert($( "#to_field_id" ).val());
-                                    }, function error(err) {
-                                          alert(err);
-                              });             
-                             }
-                            }, 
-                              function(errorCode, errorMessage) {      
-                                // An error occurred in the process
-      
-                              },
-                                message,
-                                "current_thread");
-               
-              }
-        
-          
-       
-        </script>
 
-
-    <button type="button" id="submit_button" onclick="test();" style = "margin-left:49.999%;">確定</button> 
-    <button type="button" id="submit_button" onclick="sendMessage();" style = "margin-left:49.999%;">取消</button>
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+        
+    });
+			
+ });
+		
+		</script>
     
-  </body>
+		
+	</head>
+	
+	<body>
+	   <script>
+          (function (d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {
+                  return;
+              }
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'Messenger'));
+       
+         window.extAsyncInit = function () {
+              // SDK loaded, code to follow
+              var isSupported = MessengerExtensions.isInExtension(); 
+              //alert('Is MessengerExtensions supported: ' + isSupported);
+              MessengerExtensions.getSupportedFeatures(function success(result) {
+                  let features = result.supported_features;
+                   //alert('Supported Facebook Features: ' + features);
+                     MessengerExtensions.getContext('214020109069642',
+                       function success(thread_context) {
+                        // success
+                        //document.getElementById("psid").value = thread_context.psid;
+                        //alert('PSID of current thread: ' + thread_context.psid);
+                        
+                        // More code to follow
+                      },
+                      function error(err) {
+                        alert(err);
+                      }
+                    );
+                  
+                }, function error(err) {
+                  alert(err);
+                });
+            };
+       
+       function sendMessage(){
+                     //alert('sendMessage Starts');
+                     let message = {
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"generic",
+                            "elements": [{
+                              "title":"Selected days for vacation",
+                              "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
+                              "subtitle": "From " + $( "#from_field_id" ).val()+ " to " + $( "#to_field_id" ).val(),
+                            }]
+                          }
+                        }
+                      };
+                     MessengerExtensions.beginShareFlow(function(share_response) {
+                        // User dismissed without error, but did they share the message?
+                        //alert('beginShareFlow starts');
+                        //var message = $( "#from_field_id" ).val();
+                        if(share_response.is_sent){
+                        //alert('share response sent');
+                        // The user actually did share. 
+                        // Perhaps close the window w/ requestCloseBrowser().
+                                MessengerExtensions.requestCloseBrowser(function success() {
+                                 //alert('requestCloseBrowser');
+                                 //alert($( "#from_field_id" ).val());
+                                 //alert($( "#to_field_id" ).val());
+                              }, function error(err) {
+                                    alert(err);
+                        });             
+                       }
+                      }, 
+                        function(errorCode, errorMessage) {      
+                          // An error occurred in the process
+
+                        },
+                          message,
+                          "current_thread");
+         
+        }
+    </script>
+		<!-- Start of first page -->
+		<div data-role="page" id="page1">
+		 <form id="form" name="formcl" method="post" action="https://www.messenger.com/t/talkeon">
+			<div data-role="header">
+				<h1>Select Date</h1>
+			</div><!-- /header -->
+		
+			<div role="main" class="ui-content">
+			
+				<input type="hidden" name="psid" id="psid">
+				<!------------------------ Date Picker ------------------------>
+				<p>From : </p>
+				<input type="text" id="from_field_id" name="from_date" data-field="date" readonly>
+        <br>
+        <hr>
+        
+        <p>To : </p>
+				<input type="text" id="to_field_id" name="to_date" data-field="date" readonly>
+				<br>
+        
+         <button type="button" id="submit_button" onclick="sendMessage();">Submit</button> 
+				
+			</div><!-- /content -->
+		
+      </form>
+		</div><!-- /page -->
+	
+</body>
+	
 </html>
+	
