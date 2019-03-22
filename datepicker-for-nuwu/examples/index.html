@@ -94,13 +94,7 @@
         dateEnd =  new Date(dateEnd + " " + monthAndYear);
 	dateEnd = dateEnd.Format("yyyy-MM-dd");
         let message = {
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                             "text":dateFrom + "~" + dateEnd
-                            
-                          }
-                        }
+                        "text":dateFrom + "~" + dateEnd
                       };
                      MessengerExtensions.beginShareFlow(function(share_response) {
                         // User dismissed without error, but did they share the message?
