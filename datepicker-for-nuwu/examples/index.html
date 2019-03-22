@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en" dir="ltr">
 
 	<head>
-	
+	        <meta charset="utf-8">
 		<title>Date Picker</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css" />
+    
     
     		
 	</head>
@@ -32,6 +34,88 @@
        var test = yearMOnth + dateFrom 
        }
 	   </script>
+		<script>
+          (function (d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {
+                  return;
+              }
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'Messenger'));
+       
+         window.extAsyncInit = function () {
+              // SDK loaded, code to follow
+              var isSupported = MessengerExtensions.isInExtension(); 
+              //alert('Is MessengerExtensions supported: ' + isSupported);
+              MessengerExtensions.getSupportedFeatures(function success(result) {
+                  let features = result.supported_features;
+                   //alert('Supported Facebook Features: ' + features);
+                     MessengerExtensions.getContext('214020109069642',
+                       function success(thread_context) {
+                        // success
+                        //document.getElementById("psid").value = thread_context.psid;
+                        //alert('PSID of current thread: ' + thread_context.psid);
+                        
+                        // More code to follow
+                      },
+                      function error(err) {
+                        alert(err);
+                      }
+                    );
+                  
+                }, function error(err) {
+                  alert(err);
+                });
+            };
+       
+       function sendMessage(){
+                     //alert('sendMessage Starts');
+	              var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
+       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
+       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
+       var test = yearMOnth + dateFrom 
+                     let message = {
+                        "attachment":{
+                          "type":"template",
+                          "payload":{
+                            "template_type":"generic",
+                            "elements": [{
+                              "title":"Selected days for vacation",
+                              "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
+                              "subtitle": test,
+                            }]
+                          }
+                        }
+                      };
+                     MessengerExtensions.beginShareFlow(function(share_response) {
+                        // User dismissed without error, but did they share the message?
+                        //alert('beginShareFlow starts');
+                        //var message = $( "#from_field_id" ).val();
+                        if(share_response.is_sent){
+                        //alert('share response sent');
+                        // The user actually did share. 
+                        // Perhaps close the window w/ requestCloseBrowser().
+                                MessengerExtensions.requestCloseBrowser(function success() {
+                                 //alert('requestCloseBrowser');
+                                 //alert($( "#from_field_id" ).val());
+                                 //alert($( "#to_field_id" ).val());
+                              }, function error(err) {
+                                    alert(err);
+                        });             
+                       }
+                      }, 
+                        function(errorCode, errorMessage) {      
+                          // An error occurred in the process
+
+                        },
+                          message,
+                          "current_thread");
+         
+        }
+    </script>
 
 
  
