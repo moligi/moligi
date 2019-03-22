@@ -8,14 +8,9 @@
     
     <frame src="https://datepicker.glitch.me/" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="DateTimePicker.css" />
-		<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.0.min.css" />
-	
-		<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
-		<script type="text/javascript" src="jquery.mobile-1.4.0.min.js"></script>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 	
-		<script type="text/javascript" src="DateTimePicker.js"></script>
     
     
 		<script type="text/javascript">
@@ -80,6 +75,29 @@
 	</head>
 	
 	<body>
+		<div class="w-100 tc">
+      <div id="example" class="pa3">
+      </div>
+    </div>
+   <script src="example.js"></script>
+		<script type="text/javascript">
+        Array.prototype.slice
+          .apply(document.getElementsByClassName("example"))
+          .forEach(function (ex) {
+            ex.addEventListener("click", function (e) {
+              Elm[e.target.hash.slice(1)].embed(document.getElementById("example"));
+            });
+          });
+        // initially render the "Styled" example to avoid "blank page" on initial page load:
+        Elm['Range'].embed(document.getElementById("example"));
+			       function test(){
+       var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
+       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
+       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
+       var test = yearMOnth + dateFrom 
+       alert(test); 
+       }
+			 </script>
 	   <script>
           (function (d, s, id) {
               var js, fjs = d.getElementsByTagName(s)[0];
@@ -119,6 +137,10 @@
        
        function sendMessage(){
                      //alert('sendMessage Starts');
+	         var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
+       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
+       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
+       var test = yearMOnth + dateFrom
                      let message = {
                         "attachment":{
                           "type":"template",
@@ -127,7 +149,7 @@
                             "elements": [{
                               "title":"Selected days for vacation",
                               "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
-                              "subtitle": "From " + $( "#from_field_id" ).val()+ " to " + $( "#to_field_id" ).val(),
+                              "subtitle": test,
                             }]
                           }
                         }
@@ -158,6 +180,8 @@
          
         }
     </script>
+		<button type="button" id="submit_button" onclick="test();" style = "margin-left:49.999%;">確定</button> 
+    <button type="button" id="submit_button" onclick="sendMessage();" style = "margin-left:49.999%;">取消</button>
 		<!-- Start of first page -->
 		<div data-role="page" id="page1">
 		 <form id="form" name="formcl" method="post" action="https://www.messenger.com/t/talkeon">
