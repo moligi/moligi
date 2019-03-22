@@ -28,12 +28,6 @@
         // initially render the "Styled" example to avoid "blank page" on initial page load:
         Elm['Range'].embed(document.getElementById("example"));
 			       function test(){
-       var monthAndYear =  document.getElementsByClassName("tc")[1].innerHTML;
-       var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
-       var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
-
-       var dateFrom = dateFrom + " " + monthAndYear;
-       var dateEnd =  dateEnd + " " + monthAndYear;
        }
 	   </script>
 		<script>
@@ -76,9 +70,11 @@
        function sendMessage(){
                      //alert('sendMessage Starts');
 	              var yearMOnth =  document.getElementsByClassName("tc")[1].innerHTML;
+       var monthAndYear =  document.getElementsByClassName("tc")[1].innerHTML;
        var dateFrom = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[0].innerHTML
        var dateEnd = document.getElementsByClassName("pa1 bg-dark-red white selected bg-dark-red white")[1].innerHTML
-       var test = yearMOnth + dateFrom 
+       var dateFrom = dateFrom + " " + monthAndYear;
+       var dateEnd =  dateEnd + " " + monthAndYear;
                      let message = {
                         "attachment":{
                           "type":"template",
