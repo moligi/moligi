@@ -182,32 +182,7 @@
     </script>
 		<button type="button" id="submit_button" onclick="test();" style = "margin-left:49.999%;">確定</button> 
     <button type="button" id="submit_button" onclick="sendMessage();" style = "margin-left:49.999%;">取消</button>
-		<!-- Start of first page -->
-		<div data-role="page" id="page1">
-		 <form id="form" name="formcl" method="post" action="https://www.messenger.com/t/talkeon">
-			<div data-role="header">
-				<h1>Select Date</h1>
-			</div><!-- /header -->
-		
-			<div role="main" class="ui-content">
-			
-				<input type="hidden" name="psid" id="psid">
-				<!------------------------ Date Picker ------------------------>
-				<p>From : </p>
-				<input type="text" id="from_field_id" name="from_date" data-field="date" readonly>
-        <br>
-        <hr>
-        
-        <p>To : </p>
-				<input type="text" id="to_field_id" name="to_date" data-field="date" readonly>
-				<br>
-        
-         <button type="button" id="submit_button" onclick="sendMessage();">Submit</button> 
-				
-			</div><!-- /content -->
-		
-      </form>
-		</div><!-- /page -->
+	
 	
 </body>
 	
