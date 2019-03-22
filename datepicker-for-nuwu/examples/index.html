@@ -93,13 +93,15 @@
 	dateFrom = dateFrom.Format("yyyy-MM-dd");
         dateEnd =  new Date(dateEnd + " " + monthAndYear);
 	dateEnd = dateEnd.Format("yyyy-MM-dd");
-                     let message = {
+        let message = {
                         "attachment":{
                           "type":"template",
                           "payload":{
                             "template_type":"generic",
                             "elements": [{
                               "title":dateFrom + "~" + dateEnd,
+                              "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
+                              "subtitle": dateFrom + "~" + dateEnd,
                             }]
                           }
                         }
