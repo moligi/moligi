@@ -93,43 +93,22 @@
 	dateFrom = dateFrom.Format("yyyy-MM-dd");
         dateEnd =  new Date(dateEnd + " " + monthAndYear);
 	dateEnd = dateEnd.Format("yyyy-MM-dd");
-        let message = {
-                        "attachment":{
-                          "type":"template",
-                          "payload":{
-                            "template_type":"generic",
-                            "elements": [{
-                              "title":dateFrom + "~" + dateEnd,
-                              "image_url": "https://www.libertytravel.com/sites/default/files/styles/full_size/public/vacation-hero.jpg?itok=IEwJw6L-",
-                              "subtitle": dateFrom + "~" + dateEnd,
-                            }]
-                          }
-                        }
-                      };
-                     MessengerExtensions.beginShareFlow(function(share_response) {
-                        // User dismissed without error, but did they share the message?
-                        //alert('beginShareFlow starts');
-                        //var message = $( "#from_field_id" ).val();
-                        if(share_response.is_sent){
-                        //alert('share response sent');
-                        // The user actually did share. 
-                        // Perhaps close the window w/ requestCloseBrowser().
-                                MessengerExtensions.requestCloseBrowser(function success() {
-                                 //alert('requestCloseBrowser');
-                                 //alert($( "#from_field_id" ).val());
-                                 //alert($( "#to_field_id" ).val());
-                              }, function error(err) {
-                                    alert(err);
-                        });             
-                       }
-                      }, 
-                        function(errorCode, errorMessage) {      
-                          // An error occurred in the process
+        
+                  return {
+                text: "HOTEL_SERVICE_PAYLOAD",
+                attachments: [
+                    {
+                        email: "some@email.com",
+                        hotelName: "Hotel marriott",
+                        confirmNumber: "1234567"
+                    }
+                ]
+            }
+            MessengerExtensions.requestCloseBrowser(function success() {
 
-                        },
-                          message,
-                          "current_thread");
-         
+            }, function error(err) {
+
+            });
         }
     </script>
 
